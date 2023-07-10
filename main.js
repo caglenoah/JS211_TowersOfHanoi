@@ -10,10 +10,10 @@ const assert = require('assert');
 // WHAT IS IT SAYING?   It is naming a variable readline using the "requireModule". 
 // the require module is searching for the module 'readline' then running it. 
 //WHAT DOES IT DO       
-// assigns a variable in which it's value is an interface from the readable streams (process.stdin, output: process.stdout)
+// declares a constant variable in which it's value is an interface from the readable streams (process.stdin, output: process.stdout)
 const readline = require('readline');
 
-
+//
 const rl = readline.createInterface({
   input: process.stdin,
   output: process.stdout
@@ -160,7 +160,8 @@ if (typeof describe === 'function') {
  *  -2. (ln.#is "") | 'require' | is used to load modules.
  *      -2.ex1: require('assert') searches for / loads the 'assert' module
  *  -3.  (ln.#is "") | 'readline' | provides an interface for reading data from a readable stream (referencing "process.stdin", process.stdout)
- * 
+ * II. METHODS
+ *   -1. (ln.#is "") | .createInterface() | takes two parameters - the input stream and output stream - to create a readline interface. 
  */
 
 
