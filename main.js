@@ -7,6 +7,7 @@
 // WHAT DOES IT DO?    this line will be use to de-bug or run tests
 const assert = require('assert');
 
+//envoking read line
 // WHAT IS IT SAYING?   It is naming a variable readline using the "requireModule". 
 // the require module is searching for the module 'readline' then running it. 
 //WHAT DOES IT DO       
@@ -20,14 +21,17 @@ const rl = readline.createInterface({
 });
 
 // An object that represents the three stacks of Towers of Hanoi; 
-  // * each key is an array of Numbers: 
-    // * A is the far-left, 
-    // * B is the middle, 
+
+  // * each key is an array of Numbers:
+    // * A is the far-left,
+    // * B is the middle,
     // * C is the far-right stack
-      // * Each number represents the largest to smallest tokens: 
-        // * 4 is the largest, 
+      // * Each number represents the largest to smallest tokens:
+        // * 4 is the largest,
         // * 1 is the smallest
 //key: value -note
+
+//object of arrays
 let stacks = {
   a: [4, 3, 2, 1], //if i want this [1] i have to find it in the stacks object first
   b: [],
@@ -42,9 +46,11 @@ const printStacks = () => {
 }
 
 // Next, what do you think this function should do?
-const movePiece = () => {
+//allows piece to move from one stack to another
+const movePiece = (startStack, endStack) => {
+
   // Your code here
-  // Robin- "going to need a start and end as parameters"
+  //going to need a start and end as parameters
   /**
    * neet to know start and end place of the stone, so they should be parameters -const movePiece = (startStack, endStack) => {}
    * take piece from start stack (array) and put it on the end stack
@@ -52,20 +58,33 @@ const movePiece = () => {
    * 
    */
   //must get array that is inside of the start stack
-  let piece = stacks[start].pop();
+  let piece = stacks[startStack].pop();
   
-  stacks[end].push(piece)
+  stacks[endStack].push(piece);
   
 }
 
 // Before you move, should you check if the move it actually allowed? Should 3 be able to be stacked on 2
-const isLegal = () => {
+const isLegal = (startStack, endStack) => {
   // Your code here
+  if (stacks[endStack].length === 0) {
+    return true
+  }
+  if (stacks[startStack].slice(-1) < stacks[endStack].slice(-1)) {
+    return true
+  }
+  else {
+    console.log("Enter valid input")
+    return false
+
+  }
+    
   
   /**
    * 1. try to move a piece
    * 2. check to see if it's legal (small piece on empty stack or a larger piece)
    *     -if valid return true else return false
+   *     -
    *  3. will need to know start and stop. Robin-" const isLegal = (start,stop) => {} "   
    */
 }
@@ -73,6 +92,13 @@ const isLegal = () => {
 // What is a win in Towers of Hanoi? When should this function run?
 const checkForWin = () => {
   // Your code here
+  if (stacks.b.length === 4 || stacks.c.length === 4) { 
+    console.log("You win!")
+    return true;
+  }
+  else {
+    return false
+  }
   /**
    * a win is an array of [4, 3, 2, 1,] in either the b or the c stafck
    * if yes, return; other wise return false
@@ -82,18 +108,24 @@ const checkForWin = () => {
 }
 
 // When is this function called? What should it do with its argument?
+
 const towersOfHanoi = (startStack, endStack) => {
   // Your code here
   //her's where we use all the function
   /**
    * 1. user enters a start and end stack
    * 2. check if move is legal. 
-   *   2.1. if yes, call the movePiece function if no, use console log to notify(alert) user (console.log in the terminal or some kind of notify(alert) in DOM)
+   *   2.1. if yes, call the movePiece function 
+   * // if no, use console log to notify(alert) user (console.log in the terminal or some kind of notify(alert) in DOM)
    *   2.2. if no, notify(alert) the user
    * 3. check for win (call function)
    * if yes then notify(alert) the 
    */
-
+  if (isLegal(startStack, endStack)) {
+    movePiece(startStack, endStack)
+    checkForWin()
+    
+  }
 }
 //gets a stone and figures out where to put it
 const getPrompt = () => {
@@ -181,8 +213,7 @@ if (typeof describe === 'function') {
 
 /**
  * !!QUESTIONS!! ||||||| !!ANSWER!!
- * Q1: What exactly is this doing? ||||||| (ln.1) ||||||| A1: The "use strict" directive enables JavaScript's strict mode. JavaScript's strict mode was introduced in ECMAScript 5. It enforces stricter parsing and error handling on the code at runtime. It also helps you write cleaner code and catch errors and bugs that might otherwise go unnoticed.
- * Q2: What is assert? |||||| ln
+ * Q1: What exactly is this doing? ||||||| (ln.1) ||||||| A1: The "use strict" directive enables JavaScript's strict mode. JavaScript's strict mode was introduced in ECMAScript 5. It enforces stricter parsing and error handling on the code at runtime. It also helps you write cleaner code and catch errors and bugs that might otherwise go unnoticed
  */
 
 
